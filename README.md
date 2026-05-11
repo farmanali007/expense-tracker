@@ -1,16 +1,78 @@
-# React + Vite
+# Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beginner-friendly **Expense Tracker** built with **React** and **Vite**. Add expenses, see them in a list, delete items, and keep everything saved in the browser with **localStorage** — no backend required.
 
-Currently, two official plugins are available:
+**Repository:** [github.com/farmanali007/expense-tracker](https://github.com/farmanali007/expense-tracker)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Add expenses** — Title and amount with validation (no empty fields, valid positive amounts)
+- **Expense list** — Renders all entries dynamically
+- **Delete** — Remove an expense (with a simple confirmation)
+- **Running total** — Sum of all expense amounts
+- **Persistence** — Data survives refresh via `localStorage` under the key `expenses`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the ESLint configuration
+- [React](https://react.dev/) (functional components only)
+- [Vite](https://vite.dev/) — fast dev server and build
+- Plain CSS (`src/index.css`)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+No TypeScript, Redux, or external state libraries.
+
+## Getting started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+
+### Install and run
+
+```bash
+npm install
+npm run dev
+```
+
+Open the URL shown in the terminal (usually `http://localhost:5173`).
+
+### Other commands
+
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `npm run dev`  | Start dev server with HMR |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint               |
+
+## Project structure
+
+```
+src/
+├── components/
+│   ├── ExpenseForm.jsx   # Form, validation, useRef to refocus title input
+│   ├── ExpenseList.jsx   # Maps expenses to list items
+│   └── ExpenseItem.jsx   # Single row + delete
+├── App.jsx               # State, localStorage sync, total (reduce), add/delete
+├── main.jsx
+└── index.css
+```
+
+## Data shape
+
+Each expense is a plain object:
+
+```js
+{ id: string, title: string, amount: number }
+```
+
+## Concepts used
+
+- **`useState`** — Expense list and form fields
+- **`useEffect`** — Save expenses to `localStorage` when the list changes
+- **`useRef`** — Focus the title input after a successful submit
+- **Props** — Data and callbacks between `App`, form, and list components
+- **`map` / `filter` / `reduce`** — List rendering, delete, and total
+
+## License
+
+This project is for learning purposes. Use and modify freely.
